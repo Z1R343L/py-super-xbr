@@ -21,20 +21,22 @@ def main():
 
     # input file must exist
     if not os.path.exists(args.input):
-        print("error: input file '{}' does not exist".format(args.input))
+        print(f"error: input file '{args.input}' does not exist")
         return
 
     # output file must end in a valid image file extension
     valid_extensions = tuple(Image.registered_extensions().keys())
     if not args.output.lower().endswith(valid_extensions):
-        print("error: output file '{}' does not end in a supported image file extension".format(args.output))
+        print(
+            f"error: output file '{args.output}' does not end in a supported image file extension"
+        )
         return
 
     # input must be an image
     try:
         im_input = Image.open(args.input)
     except IOError:
-        print("error: '{}' is not a valid image file".format(args.input))
+        print(f"error: '{args.input}' is not a valid image file")
         return
 
     # importing superxbr this takes a tiny bit of time, so don't do it until error checking is done
@@ -46,7 +48,7 @@ def main():
         im_output = im_output.convert(args.mode)
     im_output.save(args.output)
     if args.display_progress:
-        print('saved {}'.format(args.output))
+        print(f'saved {args.output}')
 
 
 if __name__ == '__main__':
